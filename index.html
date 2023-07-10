@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog Page</title>
+  <style>
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .blog-post {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    div{
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Create a Blog Post</h1>
+    <form id="blogForm">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title"><br><br>
+      
+      <label for="content">Content:</label>
+      <textarea id="content" name="content"></textarea><br><br>
+      
+      <label for="image">Image URL:</label>
+      <input type="text" id="image" name="image"><br><br>
+      
+      <label for="video">Video URL:</label>
+      <input type="text" id="video" name="video"><br><br>
+      
+      <button type="submit">Add Blog Post</button>
+    </form>
+    
+    <div id="blogPosts"></div>
+  </div>
+
+  <script>
+    // Function to handle the form submission
+    function addBlogPost(event) {
+      event.preventDefault();
+
+      // Get the form values
+      var title = document.getElementById('title').value;
+      var content = document.getElementById('content').value;
+      var image = document.getElementById('image').value;
+      var video = document.getElementById('video').value;
+
+      // Create a new blog post element
+      var blogPost = document.createElement('div');
+      blogPost.className = 'blog-post';
+      
+      // Add the title
+      var titleElement = document.createElement('h2');
+      titleElement.textContent = title;
+      blogPost.appendChild(titleElement);
+
+      // Add the content
+      var contentElement = document.createElement('p');
+      contentElement.textContent = content;
+      blogPost.appendChild(contentElement);
+
+      // Add the image
+      if (image !== '') {
+        var imageElement = document.createElement('img');
+        imageElement.src = image;
+        blogPost.appendChild(imageElement);
+      }
+
+      // Add the video
+      if (video !== '') {
+        var videoElement = document.createElement('iframe');
+        videoElement.src = video;
+        blogPost.appendChild(videoElement);
+      }
+
+      // Add the blog post to the blogPosts container
+      var blogPostsContainer = document.getElementById('blogPosts');
+      blogPostsContainer.appendChild(blogPost);
+
+      // Reset the form values
+      document.getElementById('blogForm').reset();
+    }
+
+    // Add event listener to the form submission
+    document.getElementById('blogForm').addEventListener('submit', addBlogPost);
+  </script>
+</body>
+</html>
